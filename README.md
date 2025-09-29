@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DEVFOLIO Portfolio
 
-## Getting Started
+Dark, animated personal portfolio highlighting full-stack and Web3 projects.
 
-First, run the development server:
+## 🚀 Live Demo
+
+- [shatadalsamui.vercel.app](https://shatadalsamui.vercel.app/)
+
+## ✨ Overview
+
+- Built with the Next.js App Router and Tailwind CSS
+- Smooth Framer Motion animations across hero, projects, and contact sections
+- Responsive layout optimized for mobile, tablet, and desktop
+- Highlights backend, Web3 interests, and featured work with clean typography
+
+## 🛠️ Tech Stack
+
+- Next.js 15 (App Router)
+- React 19
+- Tailwind CSS 4
+- Framer Motion 12
+
+## 🧩 Key Features
+
+- Hero section with quick navigation, CTA buttons, and social links
+- About section with portrait, background story, and skill highlights
+- Animated project cards showcasing notable work
+- Contact details and footer with relevant external profiles
+
+## 🧪 Getting Started
+
+Prerequisites: Node.js 18+ and npm installed locally.
 
 ```bash
+git clone https://github.com/shatadalsamui/DEVFOLIO.git
+cd DEVFOLIO/my-app
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site during development.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To generate a production build:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## 📦 Deployment
 
-To learn more about Next.js, take a look at the following resources:
+- Hosted on Vercel using the **Next.js** preset
+- Default commands: `npm install`, `next build`, `next start`
+- Environment variables are not required for the current setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Questions or ideas? Feel free to reach out via the contact links on the live site.
