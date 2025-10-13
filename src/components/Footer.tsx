@@ -1,7 +1,30 @@
 'use client'
 
+import { useRouter, usePathname } from 'next/navigation'
+
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const handleNavClick = (href: string) => {
+    // If href starts with #, it's a section link
+    if (href.startsWith('#')) {
+      const sectionId = href.substring(1)
+      
+      // If we're not on home page, navigate to home first
+      if (pathname !== '/') {
+        router.push(`/${href}`)
+        return
+      }
+      
+      // If on home page, scroll to section
+      const element = document.getElementById(sectionId)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }
 
   const footerLinks = [
     {
@@ -57,7 +80,12 @@ export default function Footer() {
   ]
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    // If not on home page, go to home first
+    if (pathname !== '/') {
+      router.push('/')
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   return (
@@ -65,7 +93,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Brand Section */}
             <div className="lg:col-span-1">
               <div className="mb-4">
@@ -136,17 +164,26 @@ export default function Footer() {
             {footerLinks.map((section, index) => (
               <div key={index}>
                 <h4 className="font-semibold text-white mb-4">{section.title}</h4>
-                <ul className="space-y-3">
+                <ul className="space-y-1.5">
                   {section.links.map((link, linkIndex) => (
                     <li key={linkIndex}>
-                      <a
-                        href={link.href}
-                        target={link.target}
-                        rel={link.rel}
-                        className="px-3 py-1.5 text-gray-400 hover:text-white transition-colors duration-200 focus:outline-none focus:bg-gray-800 focus:text-white active:bg-gray-700 rounded"
-                      >
-                        {link.name}
-                      </a>
+                      {link.href.startsWith('#') ? (
+                        <button
+                          onClick={() => handleNavClick(link.href)}
+                          className="px-3 py-1.5 text-gray-400 hover:text-white transition-colors duration-200 focus:outline-none focus:bg-gray-800 focus:text-white active:bg-gray-700 rounded text-left"
+                        >
+                          {link.name}
+                        </button>
+                      ) : (
+                        <a
+                          href={link.href}
+                          target={link.target}
+                          rel={link.rel}
+                          className="px-3 py-1.5 text-gray-400 hover:text-white transition-colors duration-200 focus:outline-none focus:bg-gray-800 focus:text-white active:bg-gray-700 rounded inline-block"
+                        >
+                          {link.name}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>

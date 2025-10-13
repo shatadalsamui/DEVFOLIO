@@ -1,69 +1,13 @@
 "use client";
+
 import { motion } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { projects as projectData } from "@/data/projects";
 
 export default function Projects() {
-  const projects = [
-    {
-      id: 1,
-      title: "E-Commerce Platform",
-      description: "A full-stack e-commerce solution built with Next.js, PostgreSQL, and Stripe integration. Features include user authentication, product management, and real-time inventory tracking.",
-      image: "/api/placeholder/600/400",
-      technologies: ["Next.js", "TypeScript", "PostgreSQL", "Stripe", "Tailwind CSS"],
-      liveUrl: "#",
-      githubUrl: "#",
-      category: "Full-Stack"
-    },
-    {
-      id: 2,
-      title: "Task Management App",
-      description: "A collaborative project management tool with real-time updates, team collaboration features, and advanced analytics dashboard.",
-      image: "/api/placeholder/600/400",
-      technologies: ["React", "Node.js", "MongoDB", "Socket.io", "Material-UI"],
-      liveUrl: "#",
-      githubUrl: "#",
-      category: "Web App"
-    },
-    {
-      id: 3,
-      title: "AI-Powered Blog Platform",
-      description: "An intelligent blogging platform that uses AI to suggest content improvements, auto-generate tags, and optimize SEO.",
-      image: "/api/placeholder/600/400",
-      technologies: ["Next.js", "Python", "OpenAI API", "Prisma", "Vercel"],
-      liveUrl: "#",
-      githubUrl: "#",
-      category: "AI/ML"
-    },
-    {
-      id: 4,
-      title: "Mobile Weather App",
-      description: "A beautiful weather application with location-based forecasts, interactive maps, and weather alerts.",
-      image: "/api/placeholder/600/400",
-      technologies: ["React Native", "TypeScript", "Weather API", "Redux"],
-      liveUrl: "#",
-      githubUrl: "#",
-      category: "Mobile"
-    },
-    {
-      id: 5,
-      title: "Portfolio Website",
-      description: "A responsive portfolio website showcasing modern design principles and smooth animations.",
-      image: "/api/placeholder/600/400",
-      technologies: ["Next.js", "Framer Motion", "Tailwind CSS", "Vercel"],
-      liveUrl: "#",
-      githubUrl: "#",
-      category: "Frontend"
-    },
-    {
-      id: 6,
-      title: "Data Visualization Dashboard",
-      description: "An interactive dashboard for data visualization with charts, graphs, and real-time data updates.",
-      image: "/api/placeholder/600/400",
-      technologies: ["React", "D3.js", "Node.js", "Express", "Chart.js"],
-      liveUrl: "#",
-      githubUrl: "#",
-      category: "Data Viz"
-    }
-  ]
+  // Use the boilerplate data from src/data/projects.ts
+  const projects = projectData;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -71,17 +15,6 @@ export default function Projects() {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
       },
     },
   };
@@ -124,16 +57,8 @@ export default function Projects() {
   )
 }
 
-interface Project {
-  id: number
-  title: string
-  description: string
-  image: string
-  technologies: string[]
-  liveUrl: string
-  githubUrl: string
-  category: string
-}
+
+import type { Project } from "@/data/projects";
 
 function ProjectCard({ project }: { project: Project }) {
   const itemVariants = {
@@ -146,92 +71,62 @@ function ProjectCard({ project }: { project: Project }) {
       },
     },
   };
-
   return (
-    <motion.div 
+    <motion.div
       className="group bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
       variants={itemVariants}
     >
       {/* Project Image */}
       <div className="relative overflow-hidden">
-        <div className="aspect-video bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 flex items-center justify-center">
-          <div className="text-4xl opacity-50">🚀</div>
-        </div>
-        
-        {/* Overlay on hover */}
-        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100">
-          <a
-            href={project.liveUrl}
-            className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors duration-200"
-          >
-            Live Demo
-          </a>
-          <a
-            href={project.githubUrl}
-            className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200"
-          >
-            GitHub
-          </a>
-        </div>
-
-        {/* Category badge */}
-        <div className="absolute top-4 right-4">
-          <span className="px-3 py-1 bg-gray-700 dark:bg-gray-600 text-white text-sm rounded-full">
-            {project.category}
-          </span>
-        </div>
+        {project.id === "Walpay" ? (
+          <div className="aspect-video bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 flex items-center justify-center relative">
+            <Image
+              src="/Walpay-1.png"
+              alt="WalPay Project Image"
+              fill
+              className="object-contain rounded-t-xl"
+            />
+          </div>
+        ) : (
+          <div className="aspect-video bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 flex items-center justify-center">
+            <div className="text-4xl opacity-50">🚀</div>
+          </div>
+        )}
+        {/* Overlay link to detail page */}
+        <Link
+          href={`/projects/${project.id}`}
+          className="absolute inset-0 z-10"
+          aria-label={`View details for ${project.title}`}
+        />
       </div>
-
       {/* Project Content */}
       <div className="p-6">
-        <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-200">
-          {project.title}
-        </h3>
-        
+        <div className="flex justify-between items-start mb-3">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-200">
+            {project.title}
+          </h3>
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors flex-shrink-0 ml-2"
+            aria-label="GitHub Repository"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              className="w-6 h-6"
+            >
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.262.82-.583 0-.287-.01-1.046-.015-2.053-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.997.108-.776.418-1.305.76-1.605-2.665-.305-5.467-1.333-5.467-5.93 0-1.31.468-2.382 1.235-3.222-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 0 1 3-.405c1.02.005 2.045.138 3 .405 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.12 3.176.77.84 1.233 1.912 1.233 3.222 0 4.61-2.807 5.625-5.478 5.922.43.372.814 1.103.814 2.222 0 1.606-.015 2.898-.015 3.293 0 .324.217.7.825.58C20.565 21.795 24 17.295 24 12c0-6.63-5.373-12-12-12z" />
+            </svg>
+          </a>
+        </div>
         <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
           {project.description}
         </p>
-
-        {/* Technologies */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.technologies.slice(0, 3).map((tech: string, index: number) => (
-            <span
-              key={index}
-              className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm rounded-full"
-            >
-              {tech}
-            </span>
-          ))}
-          {project.technologies.length > 3 && (
-            <span className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm rounded-full">
-              +{project.technologies.length - 3}
-            </span>
-          )}
-        </div>
-
-        {/* Action buttons */}
-        <div className="flex justify-between items-center">
-          <div className="flex space-x-3">
-            <a
-              href={project.liveUrl}
-              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-medium transition-colors duration-200"
-            >
-              View Project
-            </a>
-            <a
-              href={project.githubUrl}
-              className="text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 font-medium transition-colors duration-200"
-            >
-              Code
-            </a>
-          </div>
-          
-          {/* External link icon */}
-          <svg className="w-5 h-5 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-          </svg>
-        </div>
       </div>
     </motion.div>
-  )
+  );
 }

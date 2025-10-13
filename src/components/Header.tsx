@@ -1,9 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,6 +17,13 @@ export default function Header() {
   }, [])
 
   const scrollToSection = (sectionId: string) => {
+    // If we're on a different page, navigate to home first
+    if (pathname !== '/') {
+      router.push(`/#${sectionId}`)
+      return
+    }
+    
+    // If we're on home page, just scroll
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
@@ -38,10 +48,10 @@ export default function Header() {
           </div>
           
           <div className="hidden md:flex items-center space-x-1">
-            {['About', 'Projects', 'Skills', 'Contact'].map((item) => (
+            {['Home', 'About', 'Projects', 'Skills', 'Contact'].map((item) => (
               <button
                 key={item}
-                onClick={() => scrollToSection(item.toLowerCase())}
+                onClick={() => scrollToSection(item === 'Home' ? 'hero' : item.toLowerCase())}
                 className="px-3 py-2 rounded-md font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800"
               >
                 {item}
