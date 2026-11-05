@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { projects as projectData } from "@/data/projects";
 import type { Project } from "@/data/projects";
+import ImageLightboxModal, { LightboxImage } from "@/components/ImageLightboxModal";
 
 export default function Projects() {
   const projects = projectData;
@@ -50,6 +52,28 @@ export default function Projects() {
 
 function ProjectEntry({ project, index }: { project: Project; index: number }) {
   const formattedIndex = index < 10 ? `0${index}` : `${index}`;
+  const [activeImageIdx, setActiveImageIdx] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  const images: LightboxImage[] = project.gallery && project.gallery.length > 0
+    ? project.gallery.map((item) =>
+        typeof item === "string" ? { url: item, caption: project.title } : item
+      )
+    : project.image
+    ? [{ url: project.image, caption: `${project.title} Interface & Telemetry` }]
+    : [];
+
+  const currentImg = images[activeImageIdx] || (project.image ? { url: project.image, caption: project.title } : null);
+
+  const handleNextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setActiveImageIdx((prev) => (prev + 1) % images.length);
+  };
+
+  const handlePrevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setActiveImageIdx((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   return (
     <article className="border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 rounded-lg overflow-hidden transition-colors">
@@ -85,15 +109,85 @@ function ProjectEntry({ project, index }: { project: Project; index: number }) {
       {/* Main Content Grid */}
       <div className="p-6 sm:p-8 space-y-6">
         {/* Technical Preview or Headless Architecture Card */}
-        {project.image ? (
-          <div className="relative aspect-video rounded border border-neutral-200 dark:border-neutral-800 overflow-hidden bg-neutral-950">
-            <Image
-              src={project.image}
-              alt={`${project.title} Preview`}
-              fill
-              sizes="(min-width: 1024px) 896px, 100vw"
-              className="object-contain sm:object-cover object-top"
-            />
+        {currentImg ? (
+          <div className="space-y-2">
+            <div
+              onClick={() => setLightboxOpen(true)}
+              className="group relative aspect-video rounded border border-neutral-200 dark:border-neutral-800 overflow-hidden bg-neutral-950 cursor-pointer select-none"
+            >
+              <Image
+                src={currentImg.url}
+                alt={`${project.title} Preview`}
+                fill
+                sizes="(min-width: 1024px) 896px, 100vw"
+                className="object-contain sm:object-cover object-top transition-transform duration-300 group-hover:scale-[1.01]"
+              />
+
+              {/* Hover Overlay with Expand Action */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity px-3.5 py-1.5 rounded-full bg-neutral-900/90 text-white text-xs font-mono border border-neutral-700/80 flex items-center gap-1.5 shadow-lg">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                  </svg>
+                  Click to expand &amp; zoom
+                </span>
+              </div>
+
+              {/* Prev / Next Controls on the Card (if more than 1 image) */}
+              {images.length > 1 && (
+                <>
+                  <button
+                    onClick={handlePrevImage}
+                    aria-label="Previous screenshot"
+                    className="absolute left-2.5 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-neutral-950/80 hover:bg-neutral-900 border border-neutral-700/70 text-white opacity-80 hover:opacity-100 hover:scale-105 transition-all"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={handleNextImage}
+                    aria-label="Next screenshot"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-neutral-950/80 hover:bg-neutral-900 border border-neutral-700/70 text-white opacity-80 hover:opacity-100 hover:scale-105 transition-all"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </>
+              )}
+
+              {/* Image Counter Badge */}
+              {images.length > 1 && (
+                <div className="absolute bottom-2.5 right-2.5 z-10 px-2.5 py-1 rounded bg-neutral-950/85 border border-neutral-800 text-[11px] font-mono text-neutral-300">
+                  {activeImageIdx + 1} / {images.length}
+                </div>
+              )}
+            </div>
+
+            {/* Caption & Quick Pagination Dots */}
+            {images.length > 1 && (
+              <div className="flex items-center justify-between text-xs font-mono text-neutral-500 pt-1">
+                <span className="line-clamp-1">{currentImg.caption || `${project.title} Screenshot`}</span>
+                <div className="flex items-center gap-1.5 shrink-0 pl-2">
+                  {images.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveImageIdx(i);
+                      }}
+                      aria-label={`View image ${i + 1}`}
+                      className={`w-2 h-2 rounded-full transition-all ${
+                        activeImageIdx === i
+                          ? "bg-neutral-900 dark:bg-neutral-100 scale-125"
+                          : "bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-500"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <div className="rounded border border-neutral-200 dark:border-neutral-800 bg-neutral-900/90 p-5 font-mono text-xs">
@@ -170,6 +264,14 @@ function ProjectEntry({ project, index }: { project: Project; index: number }) {
           </Link>
         </div>
       </div>
+
+      {/* Lightbox / Zoom Modal for Full-Resolution Inspection from Landing Page */}
+      <ImageLightboxModal
+        images={images}
+        initialIndex={activeImageIdx}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+      />
     </article>
   );
 }
