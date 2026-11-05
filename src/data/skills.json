@@ -1,0 +1,60 @@
+{
+  "skillCategories": [
+    {
+      "title": "Systems Programming & Computer Vision",
+      "description": "GPU acceleration, computer vision inference, and native desktop UI.",
+      "skills": [
+        { "name": "Rust (Concurrency, Rayon, Crossbeam, Tokio)" },
+        { "name": "CUDA 13 & Tensor Cores" },
+        { "name": "ONNX Runtime (ort C-bindings)" },
+        { "name": "YOLO26s / YOLOv8 (FP16)" },
+        { "name": "WGPU & Iced Native GUI" },
+        { "name": "GDAL C-Bindings & GeoTIFFs" },
+        { "name": "Spatial Hash-Grid NMS" },
+        { "name": "Python (PyTorch / Model Export)" }
+      ]
+    },
+    {
+      "title": "Distributed Messaging & Stream Processing",
+      "description": "Event streaming, message brokers, and WebSocket communication.",
+      "skills": [
+        { "name": "Apache Kafka (Event Streams & Pub/Sub)" },
+        { "name": "Zenoh (Peer-to-Peer Binary Messaging)" },
+        { "name": "Redis (In-Memory Atomic Operations & TTL)" },
+        { "name": "Central Limit Order Books (BTreeMap CLOB)" },
+        { "name": "WebSockets (Real-Time Broadcasting)" },
+        { "name": "Bun Runtime & Node.js" },
+        { "name": "Express.js & REST Gateways" },
+        { "name": "Backpack Exchange Feeds (bookTicker)" }
+      ]
+    },
+    {
+      "title": "Databases & Transactional Ledgers",
+      "description": "Relational databases, transaction management, and spatial indexing.",
+      "skills": [
+        { "name": "PostgreSQL (Row-Level Locking FOR UPDATE)" },
+        { "name": "PostGIS (Spatial GIST Indexing)" },
+        { "name": "Prisma ORM (Transactions & Migrations)" },
+        { "name": "SQLx (Async Compile-Time Checked SQL)" },
+        { "name": "Double-Entry Balance & Escrow Ledgers" },
+        { "name": "Pure Integer Accounting (Cents/Paisa)" },
+        { "name": "Idempotent Webhook Processing" },
+        { "name": "Regulatory Wallet Limits (RBI PPI)" }
+      ]
+    },
+    {
+      "title": "Tooling & Infrastructure",
+      "description": "TypeScript tooling, monorepo architecture, and containerization.",
+      "skills": [
+        { "name": "TypeScript 5 (Strict Static Typing)" },
+        { "name": "Turborepo (Monorepo Build Caching)" },
+        { "name": "Docker & Multi-Stage Container Builds" },
+        { "name": "Next.js 14 / React (App Router & SSR)" },
+        { "name": "Zod (Runtime Schema Contracts)" },
+        { "name": "Linux (Debian / Ubuntu)" },
+        { "name": "Git & Automated CI/CD Workflows" },
+        { "name": "Performance Profiling & Benchmarking" }
+      ]
+    }
+  ]
+}

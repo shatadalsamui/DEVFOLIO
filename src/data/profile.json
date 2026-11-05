@@ -1,0 +1,21 @@
+{
+  "name": "Shatadal Samui",
+  "title": "Software Engineer — Systems & Distributed Backends",
+  "tagline": "Focused on low-latency systems, distributed services, and computer vision pipelines. Built with Rust, CUDA, TypeScript, Apache Kafka, and PostgreSQL.",
+  "resumeUrl": "https://drive.google.com/file/d/151_VQ3XeB1vC0t9G7pZK8e9Idcu6xCmr/view",
+  "contact": {
+    "email": "shatadalsamuimain@gmail.com",
+    "phone": "+91 8900112837",
+    "location": "Kolkata, West Bengal, India"
+  },
+  "socials": {
+    "github": "https://github.com/shatadalsamui",
+    "linkedin": "https://www.linkedin.com/in/shatadalsamui/",
+    "twitter": "https://x.com/shatadal_samui"
+  },
+  "about": [
+    "I am a software engineer focused on systems programming, distributed backends, and hardware-accelerated computer vision. My primary toolchain spans Rust, CUDA, TypeScript, Apache Kafka, and PostgreSQL.",
+    "My recent work includes three key projects: SAMDEF, an edge computer vision system in Rust and CUDA for large-scale satellite imagery with native WGPU visualization; SAMEX, a cryptocurrency spot matching engine using an in-memory Rust order book and Kafka streaming real-time prices; and WALPAY, a full-stack digital wallet enforcing transactional consistency through PostgreSQL row-level locks and bank webhook idempotency.",
+    "I focus on building reliable, performant software by writing clean concurrent code, keeping resource usage predictable, preventing race conditions, and designing systems that run dependably without unnecessary external dependencies."
+  ]
+}
