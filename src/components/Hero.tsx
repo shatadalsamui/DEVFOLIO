@@ -41,7 +41,7 @@ export default function Hero() {
               Edge Computer Vision &amp; CUDA
             </div>
             <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-normal">
-              Pipelined GPU inference, efficient GeoTIFF tiling, and native WGPU/Iced desktop visualization.
+              Pipelined GPU inference, efficient GeoTIFF tiling, and native GPUI (Vulkan) desktop visualization.
             </p>
           </div>
 

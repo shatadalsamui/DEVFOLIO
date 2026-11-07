@@ -8,7 +8,7 @@
         { "name": "CUDA 13 & Tensor Cores" },
         { "name": "ONNX Runtime (ort C-bindings)" },
         { "name": "YOLO26s / YOLOv8 (FP16)" },
-        { "name": "WGPU & Iced Native GUI" },
+        { "name": "GPUI & Vulkan Native GUI" },
         { "name": "GDAL C-Bindings & GeoTIFFs" },
         { "name": "Spatial Hash-Grid NMS" },
         { "name": "Python (PyTorch / Model Export)" }

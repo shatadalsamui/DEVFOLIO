@@ -15,7 +15,7 @@
   },
   "about": [
     "I am a software engineer focused on systems programming, distributed backends, and hardware-accelerated computer vision. My primary toolchain spans Rust, CUDA, TypeScript, Apache Kafka, and PostgreSQL.",
-    "My recent work includes three key projects: SAMDEF, an edge computer vision system in Rust and CUDA for large-scale satellite imagery with native WGPU visualization; SAMEX, a cryptocurrency spot matching engine using an in-memory Rust order book and Kafka streaming real-time prices; and WALPAY, a full-stack digital wallet enforcing transactional consistency through PostgreSQL row-level locks and bank webhook idempotency.",
+    "My recent work includes three key projects: SAMDEF, an edge computer vision system in Rust and CUDA for large-scale satellite imagery with native GPUI (Vulkan) GIS visualization; SAMEX, a cryptocurrency spot matching engine using an in-memory Rust order book and Kafka streaming real-time prices; and WALPAY, a full-stack digital wallet enforcing transactional consistency through PostgreSQL row-level locks and bank webhook idempotency.",
     "I focus on building reliable, performant software by writing clean concurrent code, keeping resource usage predictable, preventing race conditions, and designing systems that run dependably without unnecessary external dependencies."
   ]
 }
